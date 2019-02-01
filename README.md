@@ -39,10 +39,25 @@ interface UseLogicAnimateProps {
   noAnimate?: boolean;
   preLayoutEffect?: (ref: HTMLDivElement) => void;
   transitionTime?: string;
-  transitionType?: string;
+  transitionType?: AnimationTimingFunction;
   transitionDelay?: string;
 }
+
+type AnimationTimingFunction =
+  | 'linear'
+  | 'ease'
+  | 'ease-in'
+  | 'ease-out'
+  | 'ease-in-out'
+  | 'step-start'
+  | 'step-end'
+  | 'initial'
+  | 'inherit'
+  | { int: number; startEnd?: 'start' | 'end' } // steps(int, start|end)
+  | { x1: number; y1: number; x2: number; y2: number }; // cubic-bezier(x1, y1, x2, y2)
 ```
+
+https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp
 
 ### noAnimate
 
@@ -55,6 +70,6 @@ Will run before any preLayoutEffect values are given to the ref.
 _ref.style.transform_ & _ref.style.transition_ will be overwritten by library for animation purposes  
 Can be used to reset parent styles with ref.parentNode.style....
 
-### transitionTime & transitionType
+### transitionTime & transitionType & transitionDelay
 
-Will be combined into valid transition value: transform ${transitionTime} ${transitionType}
+Will be combined into valid transition value: transform ${transitionTime} ${transitionType} \${transitionDelay}
