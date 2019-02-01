@@ -1,6 +1,6 @@
 {
   "name": "react-logic-animate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Animate your react components position with logic. Hook and Basic react component available.",
   "main": "lib/index.js",
   "scripts": {
