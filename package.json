@@ -1,0 +1,70 @@
+{
+  "name": "@ludens-reklame/react-logic-animate",
+  "version": "1.0.0",
+  "description": "Animate your react components position with logic. Use useLogicAnimate or LogicAnimate",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel build:watch css:watch",
+    "build": "tsc",
+    "css": "gulp",
+    "css:watch": "gulp watch",
+    "build:watch": "tsc --watch",
+    "lint": "tslint --project \"./tsconfig.json\"",
+    "test": "mocha --watch --watch-extensions ts -r ts-node/register test/**/*.spec.ts",
+    "postversion": "git push && git push --tags",
+    "prepublish": "npm run build",
+    "preversion": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmilsWebbod/npm-typescript.git"
+  },
+  "keywords": [
+    "typescript",
+    "npm",
+    "fetch",
+    "crud",
+    "api"
+  ],
+  "author": "Emils Webbod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EmilsWebbod/npm-typescript/issues"
+  },
+  "homepage": "https://github.com/EmilsWebbod/npm-typescript#readme",
+  "files": [
+    "lib"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.3",
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.0",
+    "husky": "^1.2.0",
+    "mocha": "^5.2.0",
+    "prettier": "^1.15.2",
+    "pretty-quick": "^1.8.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "source-map-support": "^0.5.9",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.1.6",
+    "typings": "^2.1.1",
+    "yarn-run-all": "^3.1.1"
+  },
+  "peerDependencies": {
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2"
+  },
+  "dependencies": {}
+}
