@@ -1,7 +1,7 @@
 {
-  "name": "@ludens-reklame/react-logic-animate",
+  "name": "react-logic-animate",
   "version": "1.0.0",
-  "description": "Animate your react components position with logic. Use useLogicAnimate or LogicAnimate",
+  "description": "Animate your react components position with logic. Hook and Basic react component available.",
   "main": "lib/index.js",
   "scripts": {
     "start": "npm-run-all --parallel build:watch css:watch",
