@@ -1,14 +1,29 @@
 import { useEffect, useLayoutEffect } from 'react';
 
+type AnimationTimingFunction =
+  | 'linear'
+  | 'ease'
+  | 'ease-in'
+  | 'ease-out'
+  | 'ease-in-out'
+  | 'step-start'
+  | 'step-end'
+  | 'initial'
+  | 'inherit'
+  | { int: number; startEnd?: 'start' | 'end' }
+  | { x1: number; y1: number; x2: number; y2: number };
+
 export interface UseLogicAnimateProps {
   noAnimate?: boolean;
-  beforeAnimate?: (ref: HTMLDivElement) => void;
+  preLayoutEffect?: (ref: HTMLDivElement) => void;
+  transitionTime?: string;
+  transitionType?: AnimationTimingFunction;
   transitionDelay?: string;
-  transition?: string;
 }
 
 const defaultProps: UseLogicAnimateProps = {
-  transition: 'transform 250ms ease-in-out',
+  transitionTime: '250ms',
+  transitionType: 'ease-in-out',
   transitionDelay: '0s'
 };
 
@@ -19,16 +34,38 @@ export function useLogicAnimate(
   opts: UseLogicAnimateProps
 ) {
   const {
-    transition = defaultProps.transition,
+    transitionTime = defaultProps.transitionTime,
+    transitionType = defaultProps.transitionType,
     transitionDelay = defaultProps.transitionDelay,
     noAnimate,
-    beforeAnimate
+    preLayoutEffect
   } = opts;
 
+  const type = getTransitionType();
+  const transition = `transform ${transitionTime} ${type} ${transitionDelay}`;
+  console.log('trans', transition);
   let currentFrom: Rect;
   onLoad();
   useLayoutEffect(layoutEffect);
   useEffect(effect);
+
+  function getTransitionType() {
+    if (!transitionType) {
+      return defaultProps.transitionType;
+    }
+    if (typeof transitionType === 'string') {
+      return transitionType;
+    }
+    if ('x1' in transitionType) {
+      return `cubic-bezier(${transitionType.x1}, ${transitionType.y1}, ${
+        transitionType.x2
+      }, ${transitionType.y2})`;
+    }
+    if ('int' in transitionType) {
+      return `steps(${transitionType.int}, ${transitionType.startEnd ||
+        'end'})`;
+    }
+  }
 
   function onLoad() {
     if (ref) {
@@ -39,8 +76,8 @@ export function useLogicAnimate(
 
   function layoutEffect() {
     if (!noAnimate && ref) {
-      if (typeof beforeAnimate === 'function') {
-        beforeAnimate(ref);
+      if (typeof preLayoutEffect === 'function') {
+        preLayoutEffect(ref);
       }
 
       const [tx, ty] = getCoords(ref);
@@ -56,7 +93,7 @@ export function useLogicAnimate(
 
   function effect() {
     if (!noAnimate && ref) {
-      ref.style.transition = `${transition} ${transitionDelay}`;
+      ref.style.transition = transition;
       ref.style.transform = `translate3d(${0}px, ${0}px, 0)`;
     }
   }
