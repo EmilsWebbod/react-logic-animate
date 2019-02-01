@@ -8,10 +8,6 @@ export interface UseLogicAnimateProps {
 }
 
 const defaultProps: UseLogicAnimateProps = {
-  noAnimate: false,
-  beforeAnimate: () => {
-    // empty
-  },
   transition: 'transform 250ms ease-in-out',
   transitionDelay: '0s'
 };
@@ -20,9 +16,14 @@ type Rect = ClientRect | DOMRect | null;
 
 export function useLogicAnimate(
   ref: HTMLDivElement | null = null,
-  opts: UseLogicAnimateProps = defaultProps
+  opts: UseLogicAnimateProps
 ) {
-  const { transition, transitionDelay, noAnimate, beforeAnimate } = opts;
+  const {
+    transition = defaultProps.transition,
+    transitionDelay = defaultProps.transitionDelay,
+    noAnimate,
+    beforeAnimate
+  } = opts;
 
   let currentFrom: Rect;
   onLoad();
