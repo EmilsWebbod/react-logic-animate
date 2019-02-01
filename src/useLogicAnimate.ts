@@ -43,8 +43,8 @@ export function useLogicAnimate(
 
   const type = getTransitionType();
   const transition = `transform ${transitionTime} ${type} ${transitionDelay}`;
-  console.log('trans', transition);
   let currentFrom: Rect;
+
   onLoad();
   useLayoutEffect(layoutEffect);
   useEffect(effect);
