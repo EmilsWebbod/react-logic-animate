@@ -94,7 +94,7 @@ export function useLogicAnimate(
   function effect() {
     if (!noAnimate && ref) {
       ref.style.transition = transition;
-      ref.style.transform = `translate3d(${0}px, ${0}px, 0)`;
+      ref.style.transform = ``;
     }
   }
 
