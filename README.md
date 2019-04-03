@@ -2,16 +2,46 @@
 
 Move your react component without thinking about animation.
 
+Test it out  
+https://xl4nk5zpp.codesandbox.io/
+
 ## How to use
 
 ### Component
 
 ```
-import { LogicAnimate } from 'react-logic-animate';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { LogicAnimate } from "react-logic-animate";
 
-<LogicAnimate {...otps}>
-   ... Everything inside here will animate to their new position if moved in the dom
-</LogicAnimate>
+import "./styles.css";
+
+function App() {
+  const [arr, setArr] = useState([{ id: "1" }, { id: "2" }]);
+
+  return (
+    <div className="App">
+      <h1>React logic animate</h1>
+      <button
+        onClick={() => {
+          setArr([arr[1], arr[0]]);
+        }}
+      >
+        Switch
+      </button>
+      {arr.map(item => (
+        <LogicAnimate key={item.id}>
+          <div style={{ border: "1px solid black", marginBottom: ".5rem" }}>
+            Item
+          </div>
+        </LogicAnimate>
+      ))}
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
 ```
 
 ### Hook
