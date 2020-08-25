@@ -34,7 +34,8 @@
   },
   "homepage": "https://github.com/EmilsWebbod/react-logic-animate#readme",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "husky": {
     "hooks": {
